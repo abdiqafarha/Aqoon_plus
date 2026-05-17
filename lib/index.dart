@@ -1,5 +1,4 @@
 // Export pages
-export '/library/library_widget.dart' show LibraryWidget;
 export '/homepage/homepage_widget.dart' show HomepageWidget;
 export '/course_catalog/course_catalog_widget.dart' show CourseCatalogWidget;
 export '/lesson_player/lesson_player_widget.dart' show LessonPlayerWidget;

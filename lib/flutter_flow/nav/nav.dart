@@ -93,13 +93,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
         ),
         FFRoute(
-          name: LibraryWidget.routeName,
-          path: LibraryWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Library')
-              : LibraryWidget(),
-        ),
-        FFRoute(
           name: HomepageWidget.routeName,
           path: HomepageWidget.routePath,
           builder: (context, params) => params.isEmpty
@@ -134,7 +127,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: MyLearningDashboardWidget.routeName,
           path: MyLearningDashboardWidget.routePath,
-          builder: (context, params) => MyLearningDashboardWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'MyLearningDashboard')
+              : MyLearningDashboardWidget(),
         ),
         FFRoute(
           name: CourseDetailsWidget.routeName,

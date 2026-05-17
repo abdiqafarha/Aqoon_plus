@@ -1,3 +1,5 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
 import '/components/course_progress_card_widget.dart';
 import '/components/deadline_item_widget.dart';
@@ -5,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -100,7 +103,7 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                     ),
                               ),
                               Text(
-                                '3 courses in progress',
+                                'Courses in progress',
                                 style: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
@@ -126,38 +129,47 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                               ),
                             ].divide(SizedBox(height: 4.0)),
                           ),
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).primary,
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              'AR',
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              style: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    font: GoogleFonts.openSans(
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(SettingsWidget.routeName);
+                            },
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                'AR',
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      font: GoogleFonts.openSans(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
+                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .onPrimary,
+                                      fontSize: 15.2,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .fontStyle,
+                                      lineHeight: 1.2,
                                     ),
-                                    color:
-                                        FlutterFlowTheme.of(context).onPrimary,
-                                    fontSize: 15.2,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
-                                    lineHeight: 1.2,
-                                  ),
-                              overflow: TextOverflow.clip,
+                                overflow: TextOverflow.clip,
+                              ),
                             ),
                           ),
                         ],
@@ -194,7 +206,7 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Continue Learning',
@@ -216,31 +228,61 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                         lineHeight: 1.4,
                                       ),
                                 ),
-                                wrapWithModel(
-                                  model: _model.courseProgressCardModel1,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CourseProgressCardWidget(
-                                    category: 'Design',
-                                    imgDesc:
-                                        'https://dimg.dreamflow.cloud/v1/image/minimalist%20swiss%20style%20poster',
-                                    progress: '65',
-                                    progressDec: 0.65,
-                                    title: 'Advanced Typography & Grid Systems',
-                                  ),
-                                ),
-                                wrapWithModel(
-                                  model: _model.courseProgressCardModel2,
-                                  updateCallback: () => safeSetState(() {}),
-                                  child: CourseProgressCardWidget(
-                                    category: 'Development',
-                                    imgDesc:
-                                        'https://dimg.dreamflow.cloud/v1/image/abstract%20code%20lines%20on%20dark%20background',
-                                    progress: '22',
-                                    progressDec: 0.22,
-                                    title: 'Backend Architecture with Node.js',
-                                  ),
-                                ),
                               ].divide(SizedBox(height: 18.0)),
+                            ),
+                            FutureBuilder<List<CourseProgressRow>>(
+                              future: CourseProgressTable().queryRows(
+                                queryFn: (q) => q
+                                    .eqOrNull(
+                                      'user_id',
+                                      currentUserUid,
+                                    )
+                                    .eqOrNull(
+                                      'is_learning',
+                                      true,
+                                    ),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<CourseProgressRow>
+                                    listViewCourseProgressRowList =
+                                    snapshot.data!;
+
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount:
+                                      listViewCourseProgressRowList.length,
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewCourseProgressRow =
+                                        listViewCourseProgressRowList[
+                                            listViewIndex];
+                                    return CourseProgressCardWidget(
+                                      key: Key(
+                                          'Keyekc_${listViewIndex}_of_${listViewCourseProgressRowList.length}'),
+                                      progress:
+                                          listViewCourseProgressRow.progress,
+                                      courseId:
+                                          listViewCourseProgressRow.courseId!,
+                                    );
+                                  },
+                                );
+                              },
                             ),
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -274,35 +316,6 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                             lineHeight: 1.4,
                                           ),
                                     ),
-                                    Text(
-                                      'View Calendar',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelLarge
-                                          .override(
-                                            font: GoogleFonts.openSans(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
-                                                    .fontStyle,
-                                            lineHeight: 1.2,
-                                          ),
-                                    ),
                                   ],
                                 ),
                                 Column(
@@ -311,23 +324,13 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     wrapWithModel(
-                                      model: _model.deadlineItemModel1,
+                                      model: _model.deadlineItemModel,
                                       updateCallback: () => safeSetState(() {}),
                                       child: DeadlineItemWidget(
                                         course: 'Advanced Typography',
                                         day: '14',
                                         month: 'OCT',
                                         task: 'Final Project Submission',
-                                      ),
-                                    ),
-                                    wrapWithModel(
-                                      model: _model.deadlineItemModel2,
-                                      updateCallback: () => safeSetState(() {}),
-                                      child: DeadlineItemWidget(
-                                        course: 'Backend Architecture',
-                                        day: '18',
-                                        month: 'OCT',
-                                        task: 'Midterm Quiz',
                                       ),
                                     ),
                                   ].divide(SizedBox(height: 9.0)),
@@ -358,7 +361,7 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Ready for a challenge?',
+                                              'Ready to start Learning more?',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .titleSmall
@@ -393,7 +396,7 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                                   ),
                                             ),
                                             Text(
-                                              'Take the weekly design quiz to earn 50 bonus points.',
+                                              'Join 100+ students today.',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodySmall
@@ -432,7 +435,7 @@ class _MyLearningDashboardWidgetState extends State<MyLearningDashboardWidget> {
                                               updateCallback: () =>
                                                   safeSetState(() {}),
                                               child: ButtonWidget(
-                                                content: 'Start Quiz',
+                                                content: 'Explore courses',
                                                 iconPresent: false,
                                                 iconEndPresent: false,
                                                 variant: 'secondary',

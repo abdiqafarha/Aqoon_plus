@@ -244,8 +244,12 @@ dynamic deserializeParam<T>(
             return CoursesRow(data);
           case LessonsRow:
             return LessonsRow(data);
+          case CourseProgressRow:
+            return CourseProgressRow(data);
           case CourseSectionsRow:
             return CourseSectionsRow(data);
+          case LessonsProgressRow:
+            return LessonsProgressRow(data);
           case UsersRow:
             return UsersRow(data);
           default:

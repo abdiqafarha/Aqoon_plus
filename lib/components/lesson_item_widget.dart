@@ -72,7 +72,7 @@ class _LessonItemWidgetState extends State<LessonItemWidget> {
             scrollDirection: Axis.vertical,
             children: [
               Padding(
-                padding: EdgeInsets.all(18.0),
+                padding: EdgeInsets.all(16.0),
                 child: Container(
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -155,7 +155,7 @@ class _LessonItemWidgetState extends State<LessonItemWidget> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
-                              widget!.duration,
+                              '${widget!.duration} Min',
                               style: FlutterFlowTheme.of(context)
                                   .labelSmall
                                   .override(

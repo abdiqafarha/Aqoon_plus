@@ -53,6 +53,7 @@ class _SyllabusModuleChildWidgetState extends State<SyllabusModuleChildWidget> {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
+      primary: false,
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: [

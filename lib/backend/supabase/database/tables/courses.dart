@@ -14,9 +14,6 @@ class CoursesRow extends SupabaseDataRow {
   @override
   SupabaseTable get table => CoursesTable();
 
-  int get id => getField<int>('id')!;
-  set id(int value) => setField<int>('id', value);
-
   String? get title => getField<String>('title');
   set title(String? value) => setField<String>('title', value);
 
@@ -52,4 +49,7 @@ class CoursesRow extends SupabaseDataRow {
 
   String? get level => getField<String>('Level');
   set level(String? value) => setField<String>('Level', value);
+
+  String? get id => getField<String>('id');
+  set id(String? value) => setField<String>('id', value);
 }

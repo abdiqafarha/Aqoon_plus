@@ -18,9 +18,6 @@ class CourseSectionsRow extends SupabaseDataRow {
   String? get id => getField<String>('id');
   set id(String? value) => setField<String>('id', value);
 
-  int? get courseId => getField<int>('course_id');
-  set courseId(int? value) => setField<int>('course_id', value);
-
   String? get title => getField<String>('title');
   set title(String? value) => setField<String>('title', value);
 
@@ -29,4 +26,7 @@ class CourseSectionsRow extends SupabaseDataRow {
 
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
+
+  String? get courseId => getField<String>('course_id');
+  set courseId(String? value) => setField<String>('course_id', value);
 }

@@ -88,7 +88,6 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                               width: 160.0,
                               height: 160.0,
                               fit: BoxFit.contain,
-                              repeat: false,
                               animate: true,
                             ),
                             Column(

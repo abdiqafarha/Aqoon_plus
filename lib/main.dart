@@ -148,7 +148,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'Homepage': HomepageWidget(),
       'CourseCatalog': CourseCatalogWidget(),
-      'Library': LibraryWidget(),
+      'MyLearningDashboard': MyLearningDashboardWidget(),
       'Settings': SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -185,15 +185,14 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              FFIcons.kasset46,
-              size: 24.0,
+              FFIcons.kasset45,
             ),
-            label: 'Home',
+            label: '',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              FFIcons.kasset32,
+              FFIcons.kasset17,
             ),
             label: '',
             tooltip: '',

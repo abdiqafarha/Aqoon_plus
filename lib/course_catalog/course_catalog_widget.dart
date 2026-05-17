@@ -367,7 +367,6 @@ class _CourseCatalogWidgetState extends State<CourseCatalogWidget> {
               flex: 1,
               child: Container(
                 child: SingleChildScrollView(
-                  primary: false,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -465,6 +464,7 @@ class _CourseCatalogWidgetState extends State<CourseCatalogWidget> {
 
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
+                                    primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: listViewCoursesRowList.length,

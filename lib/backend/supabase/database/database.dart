@@ -7,5 +7,7 @@ export 'table.dart';
 
 export 'tables/courses.dart';
 export 'tables/lessons.dart';
+export 'tables/course_progress.dart';
 export 'tables/course_sections.dart';
+export 'tables/lessons_progress.dart';
 export 'tables/users.dart';

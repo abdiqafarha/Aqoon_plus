@@ -1,7 +1,9 @@
 import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
 import '/components/lesson_item_widget.dart';
-import '/components/tab_group_widget.dart';
+import '/components/note_card2_widget.dart';
+import '/components/resource_card_widget.dart';
+import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,7 +37,8 @@ class LessonPlayerWidget extends StatefulWidget {
   State<LessonPlayerWidget> createState() => _LessonPlayerWidgetState();
 }
 
-class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
+class _LessonPlayerWidgetState extends State<LessonPlayerWidget>
+    with TickerProviderStateMixin {
   late LessonPlayerModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -44,6 +47,12 @@ class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LessonPlayerModel());
+
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 3,
+      initialIndex: 0,
+    )..addListener(() => safeSetState(() {}));
   }
 
   @override
@@ -232,65 +241,299 @@ class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
                 ),
               ],
             ),
-            wrapWithModel(
-              model: _model.tabGroupModel,
-              updateCallback: () => safeSetState(() {}),
-              child: TabGroupWidget(
-                label1: 'Course Content',
-                label2: 'Notes',
-                label2Present: true,
-                label3: 'Resources',
-                label3Present: true,
-                label4: '',
-                label4Present: false,
-                label5: '',
-                label5Present: false,
-              ),
-            ),
             Expanded(
-              flex: 1,
-              child: Container(
-                child: SingleChildScrollView(
-                  primary: false,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(26.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget!.sectionTitle,
-                                      'Section 1',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          font: GoogleFonts.openSans(
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment(0.0, 0),
+                    child: FlutterFlowButtonTabBar(
+                      useToggleButtonStyle: true,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).labelMedium.override(
+                                font: GoogleFonts.openSans(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
+                      unselectedLabelStyle:
+                          FlutterFlowTheme.of(context).labelMedium.override(
+                                font: GoogleFonts.openSans(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
+                      labelColor: FlutterFlowTheme.of(context).secondaryText,
+                      unselectedLabelColor:
+                          FlutterFlowTheme.of(context).secondaryText,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryContainer,
+                      unselectedBackgroundColor:
+                          FlutterFlowTheme.of(context).primaryBackground,
+                      borderColor: FlutterFlowTheme.of(context).alternate,
+                      borderWidth: 1.0,
+                      borderRadius: 4.0,
+                      elevation: 0.0,
+                      buttonMargin:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                      tabs: [
+                        Tab(
+                          text: 'Lesson \nContent',
+                        ),
+                        Tab(
+                          text: 'Notes',
+                        ),
+                        Tab(
+                          text: 'Resources',
+                        ),
+                      ],
+                      controller: _model.tabBarController,
+                      onTap: (i) async {
+                        [() async {}, () async {}, () async {}][i]();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _model.tabBarController,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                decoration: BoxDecoration(),
+                                child: SingleChildScrollView(
+                                  primary: false,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            25.0, 20.0, 25.0, 10.0),
+                                        child: Container(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  widget!.sectionTitle,
+                                                  'Section 1',
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
                                                     .labelMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .fontStyle,
+                                                    .override(
+                                                      font:
+                                                          GoogleFonts.openSans(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                      lineHeight: 1.2,
+                                                    ),
+                                              ),
+                                              FutureBuilder<List<LessonsRow>>(
+                                                future:
+                                                    LessonsTable().queryRows(
+                                                  queryFn: (q) => q
+                                                      .eqOrNull(
+                                                        'section_id',
+                                                        widget!.lessonDoc
+                                                            ?.sectionId,
+                                                      )
+                                                      .order('order_index',
+                                                          ascending: true),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<LessonsRow>
+                                                      listViewLessonsRowList =
+                                                      snapshot.data!;
+
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount:
+                                                        listViewLessonsRowList
+                                                            .length,
+                                                    itemBuilder: (context,
+                                                        listViewIndex) {
+                                                      final listViewLessonsRow =
+                                                          listViewLessonsRowList[
+                                                              listViewIndex];
+                                                      return InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                            LessonPlayerWidget
+                                                                .routeName,
+                                                            queryParameters: {
+                                                              'lessonDoc':
+                                                                  serializeParam(
+                                                                listViewLessonsRow,
+                                                                ParamType
+                                                                    .SupabaseRow,
+                                                              ),
+                                                              'sectionTitle':
+                                                                  serializeParam(
+                                                                widget!
+                                                                    .sectionTitle,
+                                                                ParamType
+                                                                    .String,
+                                                              ),
+                                                              'sectionIndex':
+                                                                  serializeParam(
+                                                                widget!
+                                                                    .sectionIndex,
+                                                                ParamType
+                                                                    .String,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              '__transition_info__':
+                                                                  TransitionInfo(
+                                                                hasTransition:
+                                                                    true,
+                                                                transitionType:
+                                                                    PageTransitionType
+                                                                        .fade,
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                              ),
+                                                            },
+                                                          );
+                                                        },
+                                                        child: LessonItemWidget(
+                                                          key: Key(
+                                                              'Keyqnv_${listViewIndex}_of_${listViewLessonsRowList.length}'),
+                                                          duration:
+                                                              listViewLessonsRow
+                                                                  .duration
+                                                                  ?.toString(),
+                                                          title:
+                                                              listViewLessonsRow
+                                                                  .title,
+                                                          isActive: widget!
+                                                                  .lessonDoc
+                                                                  ?.id ==
+                                                              listViewLessonsRow
+                                                                  .id,
+                                                          isCompleted: false,
+                                                          sectionId: widget!
+                                                              .lessonDoc!
+                                                              .sectionId!,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ].divide(SizedBox(height: 15.0)),
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          letterSpacing: 0.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              25.0, 20.0, 25.0, 0.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Notes',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        font: GoogleFonts.openSans(
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
@@ -299,141 +542,78 @@ class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
                                                   .fontStyle,
-                                          lineHeight: 1.2,
                                         ),
-                                  ),
-                                  FutureBuilder<List<LessonsRow>>(
-                                    future: LessonsTable().queryRows(
-                                      queryFn: (q) => q
-                                          .eqOrNull(
-                                            'section_id',
-                                            widget!.lessonDoc?.sectionId,
-                                          )
-                                          .order('order_index',
-                                              ascending: true),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      List<LessonsRow> listViewLessonsRowList =
-                                          snapshot.data!;
-
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount:
-                                            listViewLessonsRowList.length,
-                                        itemBuilder: (context, listViewIndex) {
-                                          final listViewLessonsRow =
-                                              listViewLessonsRowList[
-                                                  listViewIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                LessonPlayerWidget.routeName,
-                                                queryParameters: {
-                                                  'lessonDoc': serializeParam(
-                                                    listViewLessonsRow,
-                                                    ParamType.SupabaseRow,
-                                                  ),
-                                                  'sectionTitle':
-                                                      serializeParam(
-                                                    widget!.sectionTitle,
-                                                    ParamType.String,
-                                                  ),
-                                                  'sectionIndex':
-                                                      serializeParam(
-                                                    widget!.sectionIndex,
-                                                    ParamType.String,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  '__transition_info__':
-                                                      TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                    duration: Duration(
-                                                        milliseconds: 0),
-                                                  ),
-                                                },
-                                              );
-                                            },
-                                            child: LessonItemWidget(
-                                              key: Key(
-                                                  'Keygnd_${listViewIndex}_of_${listViewLessonsRowList.length}'),
-                                              duration: listViewLessonsRow
-                                                  .duration
-                                                  ?.toString(),
-                                              title: listViewLessonsRow.title,
-                                              isActive: widget!.lessonDoc?.id ==
-                                                  listViewLessonsRow.id,
-                                              isCompleted: false,
-                                              sectionId:
-                                                  widget!.lessonDoc!.sectionId!,
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ].divide(SizedBox(height: 9.0)),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondarybackground2,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
+                                        lineHeight: 1.4,
+                                      ),
+                                ),
+                                wrapWithModel(
+                                  model: _model.noteCardModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: NoteCard2Widget(
+                                    content:
+                                        'Qualitative vs Quantitative research. Remember to use open-ended questions during interviews.',
+                                    tag: 'UX Design',
+                                    timestamp: '2 hours ago',
+                                    title: 'User Research Methods',
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(26.0),
-                                  child: Container(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Your Notes',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .titleSmall
-                                                  .override(
-                                                    font: GoogleFonts.openSans(
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondarybackground2,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(26.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Your Notes',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleSmall
+                                                    .override(
+                                                      font:
+                                                          GoogleFonts.openSans(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                      letterSpacing: 0.0,
                                                       fontWeight:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -444,37 +624,40 @@ class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
                                                                   context)
                                                               .titleSmall
                                                               .fontStyle,
+                                                      lineHeight: 1.4,
                                                     ),
-                                                    letterSpacing: 0.0,
+                                              ),
+                                              Icon(
+                                                Icons.open_in_new_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 18.0,
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            'Grid systems in Nordic design prioritize clarity over decoration. Emphasize whitespace to allow elements room to breathe...',
+                                            maxLines: 3,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.openSans(
                                                     fontWeight:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .titleSmall
+                                                            .bodyMedium
                                                             .fontWeight,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .titleSmall
+                                                            .bodyMedium
                                                             .fontStyle,
-                                                    lineHeight: 1.4,
                                                   ),
-                                            ),
-                                            Icon(
-                                              Icons.open_in_new_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              size: 18.0,
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          'Grid systems in Nordic design prioritize clarity over decoration. Emphasize whitespace to allow elements room to breathe...',
-                                          maxLines: 3,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.openSans(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  letterSpacing: 0.0,
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -485,57 +668,122 @@ class _LessonPlayerWidgetState extends State<LessonPlayerWidget> {
                                                               context)
                                                           .bodyMedium
                                                           .fontStyle,
+                                                  lineHeight: 1.5,
                                                 ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          wrapWithModel(
+                                            model: _model.buttonModel1,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: ButtonWidget(
+                                              content: 'Add New Note',
+                                              icon: Icon(
+                                                Icons.edit_rounded,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                                lineHeight: 1.5,
+                                                        .primaryText,
+                                                size: 16.0,
                                               ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        wrapWithModel(
-                                          model: _model.buttonModel1,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: ButtonWidget(
-                                            content: 'Add New Note',
-                                            icon: Icon(
-                                              Icons.edit_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 16.0,
+                                              iconPresent: true,
+                                              iconEndPresent: false,
+                                              variant: 'outline',
+                                              size: 'small',
+                                              fullWidth: false,
+                                              loading: false,
+                                              disabled: false,
                                             ),
-                                            iconPresent: true,
-                                            iconEndPresent: false,
-                                            variant: 'outline',
-                                            size: 'small',
-                                            fullWidth: false,
-                                            loading: false,
-                                            disabled: false,
                                           ),
-                                        ),
-                                      ].divide(SizedBox(height: 18.0)),
+                                        ].divide(SizedBox(height: 18.0)),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ].divide(SizedBox(height: 26.0)),
+                              ].divide(SizedBox(height: 15.0)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    25.0, 20.0, 25.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Downloadable Files',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.openSans(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                            lineHeight: 1.4,
+                                          ),
+                                    ),
+                                    wrapWithModel(
+                                      model: _model.resourceCardModel1,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: ResourceCardWidget(
+                                        bgColor: Color(0xFFFFEBEE),
+                                        icon: Icon(
+                                          Icons.picture_as_pdf_rounded,
+                                          color: Color(0xFFD32F2F),
+                                          size: 24.0,
+                                        ),
+                                        iconColor: Color(0xFFD32F2F),
+                                        size: '2.4 MB',
+                                        title: 'Course Curriculum PDF',
+                                        type: 'PDF',
+                                      ),
+                                    ),
+                                    wrapWithModel(
+                                      model: _model.resourceCardModel2,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: ResourceCardWidget(
+                                        bgColor: Color(0xFFE3F2FD),
+                                        icon: Icon(
+                                          Icons.code_rounded,
+                                          color: Color(0xFF1976D2),
+                                          size: 24.0,
+                                        ),
+                                        iconColor: Color(0xFF1976D2),
+                                        size: '450 KB',
+                                        title: 'Sample Code Snippets',
+                                        type: 'ZIP',
+                                      ),
+                                    ),
+                                  ].divide(SizedBox(height: 15.0)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             Container(

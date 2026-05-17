@@ -1,7 +1,9 @@
 import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
 import '/components/lesson_item_widget.dart';
-import '/components/tab_group_widget.dart';
+import '/components/note_card2_widget.dart';
+import '/components/resource_card_widget.dart';
+import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,24 +24,40 @@ class LessonPlayerModel extends FlutterFlowModel<LessonPlayerWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Model for TabGroup.
-  late TabGroupModel tabGroupModel;
+  // State field(s) for TabBar widget.
+  TabController? tabBarController;
+  int get tabBarCurrentIndex =>
+      tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
+
+  // Model for NoteCard.
+  late NoteCard2Model noteCardModel;
   // Model for Button.
   late ButtonModel buttonModel1;
+  // Model for ResourceCard.
+  late ResourceCardModel resourceCardModel1;
+  // Model for ResourceCard.
+  late ResourceCardModel resourceCardModel2;
   // Model for Button.
   late ButtonModel buttonModel2;
 
   @override
   void initState(BuildContext context) {
-    tabGroupModel = createModel(context, () => TabGroupModel());
+    noteCardModel = createModel(context, () => NoteCard2Model());
     buttonModel1 = createModel(context, () => ButtonModel());
+    resourceCardModel1 = createModel(context, () => ResourceCardModel());
+    resourceCardModel2 = createModel(context, () => ResourceCardModel());
     buttonModel2 = createModel(context, () => ButtonModel());
   }
 
   @override
   void dispose() {
-    tabGroupModel.dispose();
+    tabBarController?.dispose();
+    noteCardModel.dispose();
     buttonModel1.dispose();
+    resourceCardModel1.dispose();
+    resourceCardModel2.dispose();
     buttonModel2.dispose();
   }
 }

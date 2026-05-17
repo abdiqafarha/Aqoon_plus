@@ -133,7 +133,6 @@ class _HomepageWidgetState extends State<HomepageWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SingleChildScrollView(
-          primary: false,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -326,8 +325,9 @@ class _HomepageWidgetState extends State<HomepageWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
+                              onPressed: () async {
+                                context
+                                    .pushNamed(CourseCatalogWidget.routeName);
                               },
                               text: 'Explore Courses',
                               options: FFButtonOptions(
@@ -596,6 +596,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
 
                         return ListView.builder(
                           padding: EdgeInsets.zero,
+                          primary: false,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: listViewCoursesRowList.length,
@@ -982,7 +983,7 @@ class _HomepageWidgetState extends State<HomepageWidget>
                                     ),
                               ),
                               Text(
-                                'Join 50,000+ students today.',
+                                'Join 100+ students today.',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

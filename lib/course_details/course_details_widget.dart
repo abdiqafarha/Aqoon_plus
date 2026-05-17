@@ -735,10 +735,12 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                                 ),
                                 FutureBuilder<List<CourseSectionsRow>>(
                                   future: CourseSectionsTable().queryRows(
-                                    queryFn: (q) => q.eqOrNull(
-                                      'course_id',
-                                      widget!.courseDoc?.id,
-                                    ),
+                                    queryFn: (q) => q
+                                        .eqOrNull(
+                                          'course_id',
+                                          widget!.courseDoc?.id,
+                                        )
+                                        .order('order_index', ascending: true),
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
