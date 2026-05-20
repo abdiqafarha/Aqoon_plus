@@ -1,6 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/checkbox_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -34,14 +33,13 @@ class SingupModel extends FlutterFlowModel<SingupWidget> {
   late bool confirmPasswordVisibility;
   String? Function(BuildContext, String?)?
       confirmPasswordTextControllerValidator;
-  // Model for Checkbox.
-  late CheckboxModel checkboxModel;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue;
 
   @override
   void initState(BuildContext context) {
     passwordVisibility = false;
     confirmPasswordVisibility = false;
-    checkboxModel = createModel(context, () => CheckboxModel());
   }
 
   @override
@@ -57,7 +55,5 @@ class SingupModel extends FlutterFlowModel<SingupWidget> {
 
     confirmPasswordFocusNode?.dispose();
     confirmPasswordTextController?.dispose();
-
-    checkboxModel.dispose();
   }
 }

@@ -201,6 +201,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ReviewsWidget.routeName,
           path: ReviewsWidget.routePath,
           builder: (context, params) => ReviewsWidget(),
+        ),
+        FFRoute(
+          name: HelpCenterWidget.routeName,
+          path: HelpCenterWidget.routePath,
+          builder: (context, params) => HelpCenterWidget(),
+        ),
+        FFRoute(
+          name: LiveChatWidget.routeName,
+          path: LiveChatWidget.routePath,
+          builder: (context, params) => LiveChatWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

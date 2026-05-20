@@ -114,6 +114,12 @@ class _SyllabusModuleChildWidgetState extends State<SyllabusModuleChildWidget> {
                           ParamType.String,
                         ),
                       }.withoutNulls,
+                      extra: <String, dynamic>{
+                        '__transition_info__': TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.bottomToTop,
+                        ),
+                      },
                     );
                   },
                   child: LessonRowWidget(

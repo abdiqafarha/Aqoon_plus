@@ -2,12 +2,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import 'reviews_widget.dart' show ReviewsWidget;
+import 'faq_item_widget.dart' show FaqItemWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ReviewsModel extends FlutterFlowModel<ReviewsWidget> {
+class FaqItemModel extends FlutterFlowModel<FaqItemWidget> {
+  ///  Local state fields for this component.
+
+  bool showAnswer = false;
+
   @override
   void initState(BuildContext context) {}
 

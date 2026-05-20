@@ -67,11 +67,17 @@ class _CourseCard2WidgetState extends State<CourseCard2Widget> {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8.0),
+          topRight: Radius.circular(8.0),
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8.0),
+              topRight: Radius.circular(8.0),
+            ),
             shape: BoxShape.rectangle,
             border: Border.all(
               color: FlutterFlowTheme.of(context).alternate,
@@ -88,17 +94,27 @@ class _CourseCard2WidgetState extends State<CourseCard2Widget> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).surfaceVariant,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                    ),
                     shape: BoxShape.rectangle,
                   ),
-                  child: CachedNetworkImage(
-                    fadeInDuration: Duration(milliseconds: 0),
-                    fadeOutDuration: Duration(milliseconds: 0),
-                    imageUrl: valueOrDefault<String>(
-                      widget!.imageDesc,
-                      'https://dimg.dreamflow.cloud/v1/image/clean%20white%20desk%20with%20a%20single%20laptop%20and%20a%20plant',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
                     ),
-                    fit: BoxFit.cover,
-                    alignment: Alignment(0.0, 0.0),
+                    child: CachedNetworkImage(
+                      fadeInDuration: Duration(milliseconds: 0),
+                      fadeOutDuration: Duration(milliseconds: 0),
+                      imageUrl: valueOrDefault<String>(
+                        widget!.imageDesc,
+                        'https://dimg.dreamflow.cloud/v1/image/clean%20white%20desk%20with%20a%20single%20laptop%20and%20a%20plant',
+                      ),
+                      fit: BoxFit.cover,
+                      alignment: Alignment(0.0, 0.0),
+                    ),
                   ),
                 ),
               ),
@@ -248,7 +264,7 @@ class _CourseCard2WidgetState extends State<CourseCard2Widget> {
                 color: FlutterFlowTheme.of(context).alternate,
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 5.0),
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 10.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

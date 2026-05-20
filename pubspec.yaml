@@ -36,9 +36,9 @@ dependencies:
   chewie: 1.11.3
   collection: 1.19.1
   csslib: 1.0.2
-  equatable: 2.0.7
   flutter_animate: 4.5.0
   flutter_cache_manager: 3.4.1
+  flutter_rating_bar: 4.0.1
   flutter_svg: 2.1.0
   font_awesome_flutter: 10.7.0
   from_css_color: 2.0.0
@@ -48,11 +48,9 @@ dependencies:
   gotrue: 2.12.0
   hive: 2.2.3
   html: 0.15.6
-  http: 1.4.0
   intl: 0.20.2
   json_path: 0.7.2
   lottie: 3.1.2
-  mime_type: 1.0.0
   page_transition: 2.1.0
   path_provider: 2.1.4
   path_provider_android: 2.2.10

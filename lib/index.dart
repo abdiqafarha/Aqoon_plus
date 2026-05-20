@@ -15,3 +15,5 @@ export '/checkout/checkout_widget.dart' show CheckoutWidget;
 export '/payment_successful/payment_successful_widget.dart'
     show PaymentSuccessfulWidget;
 export '/reviews/reviews_widget.dart' show ReviewsWidget;
+export '/help_center/help_center_widget.dart' show HelpCenterWidget;
+export '/live_chat/live_chat_widget.dart' show LiveChatWidget;

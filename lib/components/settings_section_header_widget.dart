@@ -47,7 +47,7 @@ class _SettingsSectionHeaderWidgetState
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(26.0, 26.0, 26.0, 9.0),
+        padding: EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 25.0, 10.0),
         child: Container(
           child: Text(
             valueOrDefault<String>(

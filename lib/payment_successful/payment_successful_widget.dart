@@ -85,8 +85,8 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                           children: [
                             Lottie.network(
                               'https://dimg.dreamflow.cloud/v1/lottie/success+checkmark+green',
-                              width: 160.0,
-                              height: 160.0,
+                              width: 120.0,
+                              height: 120.0,
                               fit: BoxFit.contain,
                               animate: true,
                             ),
@@ -95,34 +95,6 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Payment Successful!',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        font: GoogleFonts.openSans(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .fontStyle,
-                                        lineHeight: 1.3,
-                                      ),
-                                ),
                                 Text(
                                   'You\'ve successfully enrolled in the course',
                                   textAlign: TextAlign.center,
@@ -153,7 +125,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                                 ),
                               ].divide(SizedBox(height: 4.0)),
                             ),
-                          ].divide(SizedBox(height: 18.0)),
+                          ].divide(SizedBox(height: 15.0)),
                         ),
                       ),
                       Material(
@@ -177,7 +149,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(26.0),
+                            padding: EdgeInsets.all(25.0),
                             child: Container(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -388,7 +360,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                                       Container(
                                         height: 4.0,
                                       ),
-                                    ].divide(SizedBox(height: 18.0)),
+                                    ].divide(SizedBox(height: 5.0)),
                                   ),
                                   Divider(
                                     height: 16.0,
@@ -461,7 +433,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                                       ),
                                     ],
                                   ),
-                                ].divide(SizedBox(height: 8.0)),
+                                ].divide(SizedBox(height: 6.0)),
                               ),
                             ),
                           ),
@@ -486,6 +458,13 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                                     ParamType.SupabaseRow,
                                   ),
                                 }.withoutNulls,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType:
+                                        PageTransitionType.rightToLeft,
+                                  ),
+                                },
                               );
                             },
                             text: 'Go to Course',
@@ -571,7 +550,16 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(HomepageWidget.routeName);
+                              context.pushNamed(
+                                HomepageWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType:
+                                        PageTransitionType.leftToRight,
+                                  ),
+                                },
+                              );
                             },
                             child: wrapWithModel(
                               model: _model.buttonModel,
@@ -588,7 +576,7 @@ class _PaymentSuccessfulWidgetState extends State<PaymentSuccessfulWidget> {
                               ),
                             ),
                           ),
-                        ].divide(SizedBox(height: 18.0)),
+                        ].divide(SizedBox(height: 13.0)),
                       ),
                       Container(
                         height: 26.0,
